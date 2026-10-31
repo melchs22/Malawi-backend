@@ -47,6 +47,7 @@ class WorkshopPhoneNormalizationTests(SimpleTestCase):
 @override_settings(
     EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend',
     PAYCHANGU_MODE='test',
+    SECURE_SSL_REDIRECT=False,
 )
 class WorkshopAPITests(TestCase):
     def setUp(self):

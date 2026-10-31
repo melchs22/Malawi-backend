@@ -30,7 +30,7 @@ docker exec malawi-db-1 dropdb --if-exists --force -U "$db_user" "$test_db_name"
 docker compose --project-name malawi --file "$compose_file" --file "$compose_override" run --rm --no-deps \
   web python manage.py makemigrations --check --dry-run </dev/null
 docker compose --project-name malawi --file "$compose_file" --file "$compose_override" run --rm --no-deps \
-  web python manage.py test users.tests --verbosity 1 </dev/null
+  web python manage.py test users.tests garages.tests.test_workshop_api --verbosity 1 </dev/null
 
 backup_dir=/opt/smart-mobility/backups/backend-deploy
 install -d -m 700 "$backup_dir"
