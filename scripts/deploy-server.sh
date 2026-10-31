@@ -16,7 +16,7 @@ for service in web worker beat; do
 done
 
 compose_file=/opt/smart-mobility/docker-compose.deploy.yml
-docker compose --project-name malawi --file "$compose_file" run --rm --no-deps --no-build \
+docker compose --project-name malawi --file "$compose_file" run --rm --no-deps \
   web python manage.py test users.tests --verbosity 1
 
 backup_dir=/opt/smart-mobility/backups/backend-deploy
@@ -27,7 +27,7 @@ docker exec malawi-db-1 sh -c \
 chmod 600 "$backup_file"
 test -s "$backup_file"
 
-docker compose --project-name malawi --file "$compose_file" run --rm --no-deps --no-build \
+docker compose --project-name malawi --file "$compose_file" run --rm --no-deps \
   web python manage.py migrate --noinput
 docker compose --project-name malawi --file "$compose_file" up -d --no-build --force-recreate \
   web worker beat
