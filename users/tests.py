@@ -32,6 +32,7 @@ class AdminAuditLogApiTests(APITestCase):
                 },
             },
             format="json",
+            secure=True,
         )
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -42,7 +43,7 @@ class AdminAuditLogApiTests(APITestCase):
         )
         self.assertEqual(AdminAuditLog.objects.count(), 1)
 
-        list_response = self.client.get(self.url)
+        list_response = self.client.get(self.url, secure=True)
         self.assertEqual(list_response.status_code, status.HTTP_200_OK)
         self.assertEqual(list_response.data["results"][0]["action_description"], "Updated rider approval status")
 
@@ -55,6 +56,7 @@ class AdminAuditLogApiTests(APITestCase):
                 "changes": ["not", "an", "object"],
             },
             format="json",
+            secure=True,
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
