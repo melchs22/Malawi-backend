@@ -18,13 +18,21 @@ done
 compose_file=/opt/smart-mobility/docker-compose.deploy.yml
 compose_override=/opt/smart-mobility/backend/docker-compose.production.override.yml
 docker compose --project-name malawi --file "$compose_file" --file "$compose_override" run --rm --no-deps \
+  web python manage.py makemigrations --check --dry-run </dev/null
+docker compose --project-name malawi --file "$compose_file" --file "$compose_override" run --rm --no-deps \
   web python manage.py test users.tests --verbosity 1 </dev/null
 
 backup_dir=/opt/smart-mobility/backups/backend-deploy
 install -d -m 700 "$backup_dir"
 backup_file="${backup_dir}/database-${DEPLOY_REF}-$(date -u +%Y%m%d%H%M%S).dump"
-docker exec malawi-db-1 sh -c \
-  'pg_dump -U "$POSTGRES_USER" "$POSTGRES_DB" -Fc' > "$backup_file"
+db_identity="$(docker exec malawi-web-1 python -c \
+  'import os; os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings"); from django.conf import settings; db = settings.DATABASES["default"]; print(db["USER"], db["NAME"])')"
+read -r db_user db_name <<< "$db_identity"
+if [ -z "$db_user" ] || [ -z "$db_name" ]; then
+  echo "Could not read the configured Django database identity for backup." >&2
+  exit 1
+fi
+docker exec malawi-db-1 pg_dump -U "$db_user" "$db_name" -Fc > "$backup_file"
 chmod 600 "$backup_file"
 test -s "$backup_file"
 
