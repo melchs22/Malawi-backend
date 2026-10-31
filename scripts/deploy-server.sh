@@ -17,7 +17,7 @@ done
 
 compose_file=/opt/smart-mobility/docker-compose.deploy.yml
 docker compose --project-name malawi --file "$compose_file" run --rm --no-deps \
-  web python manage.py test users.tests --verbosity 1
+  web python manage.py test users.tests --verbosity 1 </dev/null
 
 backup_dir=/opt/smart-mobility/backups/backend-deploy
 install -d -m 700 "$backup_dir"
@@ -28,7 +28,7 @@ chmod 600 "$backup_file"
 test -s "$backup_file"
 
 docker compose --project-name malawi --file "$compose_file" run --rm --no-deps \
-  web python manage.py migrate --noinput
+  web python manage.py migrate --noinput </dev/null
 docker compose --project-name malawi --file "$compose_file" up -d --no-build --force-recreate \
   web worker beat
 
