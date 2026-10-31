@@ -155,7 +155,7 @@ class _RideScreenState extends State<RideScreen> {
         if (!_isCancelling) {
           _isCancelling = true;
           _playCancellationSound();
-          _showRideCancelledInfoDialog(data["message"] ?? "The Roadie has cancelled this request.");
+          _showRideCancelledInfoDialog(data["message"] ?? "The Mechanic has cancelled this request.");
         }
       }
 
@@ -181,7 +181,7 @@ class _RideScreenState extends State<RideScreen> {
           if (!_isChatOpen && mounted && !isDuplicate) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('${data["sender_name"] ?? "Roadie"}: ${data["text"]}'),
+                content: Text('${data["sender_name"] ?? "Mechanic"}: ${data["text"]}'),
                 duration: const Duration(seconds: 3),
                 backgroundColor: const Color(0xFF10223D),
                 behavior: SnackBarBehavior.floating,
@@ -222,7 +222,7 @@ class _RideScreenState extends State<RideScreen> {
 
         if (status == "ARRIVED") {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Roadie has arrived!")),
+            const SnackBar(content: Text("Mechanic has arrived!")),
           );
         }
 
@@ -409,7 +409,7 @@ class _RideScreenState extends State<RideScreen> {
     final roadiePhone = currentRequest["rodie_phone"];
     if (roadiePhone == null || roadiePhone.toString().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Roadie phone number not available")),
+        const SnackBar(content: Text("Mechanic phone number not available")),
       );
       return;
     }
@@ -458,7 +458,7 @@ class _RideScreenState extends State<RideScreen> {
                       const Icon(Icons.chat_bubble_rounded, color: Colors.white, size: 22),
                       const SizedBox(width: 10),
                       Text(
-                        "Chat with ${roadieName ?? currentRequest["rodie_username"] ?? currentRequest["rodie_name"] ?? "Roadie"}",
+                        "Chat with ${roadieName ?? currentRequest["rodie_username"] ?? currentRequest["rodie_name"] ?? "Mechanic"}",
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -488,7 +488,7 @@ class _RideScreenState extends State<RideScreen> {
                               Icon(Icons.chat_bubble_outline, size: 48, color: Colors.grey),
                               SizedBox(height: 12),
                               Text(
-                                "No messages yet.\nSend a message to the roadie.",
+                                "No messages yet.\nSend a message to the mechanic.",
                                 style: TextStyle(color: Colors.grey, fontSize: 14),
                                 textAlign: TextAlign.center,
                               ),
@@ -504,7 +504,7 @@ class _RideScreenState extends State<RideScreen> {
                             final msg = messages[messages.length - 1 - index];
                             final isMe = msg["sender_role"] == "RIDER";
                             final time = _formatMessageTime(msg["created_at"]?.toString());
-                            final senderName = isMe ? null : (msg["sender_name"] ?? "Roadie");
+                            final senderName = isMe ? null : (msg["sender_name"] ?? "Mechanic");
 
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4),
@@ -942,7 +942,7 @@ class _RideScreenState extends State<RideScreen> {
                         currentRequest["rodie_username"] ?? 
                         currentRequest["rodie_name"] ?? 
                         currentRequest["roadie_name"] ?? 
-                        "Roadie",
+                        "Mechanic",
                         style: const TextStyle(
                           color: Color(0xFF10223D),
                           fontSize: 18,
@@ -1037,7 +1037,7 @@ class _RideScreenState extends State<RideScreen> {
                   urlTemplate:
                       "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
                   subdomains: const ['a', 'b', 'c', 'd'],
-                  userAgentPackageName: 'com.vehix.roadie',
+                  userAgentPackageName: 'com.srs.roadie',
                 ),
 
                 MarkerLayer(
@@ -1229,9 +1229,9 @@ class _RideScreenState extends State<RideScreen> {
   String _getStatusDisplayText() {
     final status = currentRequest["status"]?.toString().toUpperCase() ?? "PENDING";
     switch (status) {
-      case "ACCEPTED": return "Roadie has accepted your request";
-      case "EN_ROUTE": return "Roadie is on the way to your location";
-      case "ARRIVED": return "Roadie has reached your location";
+      case "ACCEPTED": return "Mechanic has accepted your request";
+      case "EN_ROUTE": return "Mechanic is on the way to your location";
+      case "ARRIVED": return "Mechanic has reached your location";
       case "STARTED": return "Service is currently in progress";
       case "COMPLETED": return "Service completed successfully";
       case "CANCELLED": return "Request has been cancelled";
@@ -1282,4 +1282,3 @@ class _RideScreenState extends State<RideScreen> {
     Navigator.of(context).popUntil((route) => route.isFirst);
   }
 }
-

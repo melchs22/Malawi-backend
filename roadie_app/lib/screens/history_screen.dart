@@ -117,7 +117,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             const SizedBox(height: 8),
             _buildInfoRow(Icons.tag, 'Job ID', '#$jobId'),
             const SizedBox(height: 8),
-            _buildInfoRow(Icons.person, 'Rider', riderUsername),
+            _buildInfoRow(Icons.person, 'Driver', riderUsername),
           ],
         ),
       ),

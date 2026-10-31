@@ -1,6 +1,6 @@
 name: rider_app
 
-description: "A new Flutter project."
+description: "SRS User mobile application."
 
 # The following line prevents the package from being accidentally published to
 
@@ -138,7 +138,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  image_path: "assets/vehix.png"
+  image_path: "assets/smart_mobility_logo.png"
   min_sdk_android: 21 # android min sdk min:16, default:21
 
 
@@ -167,8 +167,7 @@ flutter:
 
   assets:
 
-    - assets/logo.jpeg
-    - assets/rider.png
+    - assets/smart_mobility_logo.png
     - assets/Accept.mp3
     - assets/cancel.mp3
     - assets/icons/
@@ -219,4 +218,3 @@ flutter:
   # For details regarding fonts from package dependencies,
 
   # see https://flutter.dev/to/font-from-package
-

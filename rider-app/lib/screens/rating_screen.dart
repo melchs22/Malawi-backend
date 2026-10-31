@@ -90,8 +90,8 @@ class _RatingScreenState extends State<RatingScreen> {
       name = "${counterpart["first_name"]} ${counterpart["last_name"] ?? ""}".trim();
     } else {
       name = widget.isRoadie
-          ? (widget.request["rider_name"]?.toString() ?? "Rider")
-          : (widget.request["rodie_name"]?.toString() ?? "Roadie");
+          ? (widget.request["rider_name"]?.toString() ?? "Driver")
+          : (widget.request["rodie_name"]?.toString() ?? "Mechanic");
     }
 
     return Scaffold(

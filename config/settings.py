@@ -99,7 +99,8 @@ MIDDLEWARE = [
 ]
 
 # CORS Configuration
-CORS_ALLOW_ALL_ORIGINS = True  # Changed to False for production
+CORS_ALLOW_ALL_ORIGINS = False
+WORKSHOP_PORTAL_ORIGIN = config('WORKSHOP_PORTAL_ORIGIN', default='')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -108,7 +109,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://vehix.ug",
     "https://www.vehix.ug",
     "https://backend.vehix.ug",
-]
+] + ([WORKSHOP_PORTAL_ORIGIN] if WORKSHOP_PORTAL_ORIGIN else [])
 
 # Allow credentials (cookies, authorization headers)
 CORS_ALLOW_CREDENTIALS = True
@@ -154,6 +155,12 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.FormParser',
         'rest_framework.parsers.MultiPartParser',
     ),
+    'DEFAULT_THROTTLE_RATES': {
+        'garage_registration': '5/hour',
+        'workshop_payment': '10/hour',
+        'password_reset': '5/hour',
+        'password_reset_confirm': '10/hour',
+    },
 }
 
 SIMPLE_JWT = {
@@ -228,7 +235,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Africa/Kampala'  # Changed to Uganda timezone
+TIME_ZONE = config('TIME_ZONE', default='Africa/Blantyre')
 
 USE_I18N = True
 
@@ -333,6 +340,16 @@ PESAPAL_CONSUMER_KEY = config('PESAPAL_CONSUMER_KEY', default='')
 PESAPAL_CONSUMER_SECRET = config('PESAPAL_CONSUMER_SECRET', default='')
 PESAPAL_IPN_ID = config('PESAPAL_IPN_ID', default='')
 
+# PayChangu is used for Malawi workshop invoice payments. Merchant keys are
+# required at runtime; checkout remains unavailable until they are configured.
+PAYCHANGU_BASE_URL = config('PAYCHANGU_BASE_URL', default='https://api.paychangu.com')
+PAYCHANGU_SECRET_KEY = config('PAYCHANGU_SECRET_KEY', default='')
+PAYCHANGU_WEBHOOK_SECRET = config('PAYCHANGU_WEBHOOK_SECRET', default='')
+PAYCHANGU_CALLBACK_URL = config('PAYCHANGU_CALLBACK_URL', default='')
+PAYCHANGU_RETURN_URL = config('PAYCHANGU_RETURN_URL', default='')
+PAYCHANGU_MODE = config('PAYCHANGU_MODE', default='live').lower()
+PAYCHANGU_CURRENCY = 'MWK'
+
 # Debug: Print Pesapal config (remove in production)
 if DEBUG:
     print(f"Pesapal URL: {PESAPAL_URL}")
@@ -381,5 +398,9 @@ CELERY_BEAT_SCHEDULE = {
     'sweep-offline-rodies-every-5-minutes': {
         'task': 'users.tasks.sweep_offline_rodies',
         'schedule': timedelta(minutes=5),
+    },
+    'reconcile-pending-workshop-payments-every-15-minutes': {
+        'task': 'garages.tasks.reconcile_pending_payments',
+        'schedule': timedelta(minutes=15),
     },
 }

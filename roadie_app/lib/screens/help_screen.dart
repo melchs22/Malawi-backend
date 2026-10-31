@@ -18,7 +18,7 @@ class HelpScreen extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(16.0),
         child: Text(
-          'For assistance, please contact support@vehix.ug or call +256 123 456789.\nThank you for using Vehix!',
+          'For assistance, please contact support@smartmobilityroadcare.com or call +256 123 456789.\nThank you for using SRS!',
           style: TextStyle(fontSize: 16),
         ),
       ),

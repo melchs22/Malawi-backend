@@ -1,7 +1,7 @@
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'dart:async';
 
-/// Professional Wake Lock Service for Vehix Apps using wakelock_plus
+/// Professional Wake Lock Service for SRS Apps using wakelock_plus
 /// 
 /// Features:
 /// - Reliable background/foreground management

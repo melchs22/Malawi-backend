@@ -44,6 +44,7 @@ class User(AbstractUser):
         ('RIDER', 'Rider'),
         ('RODIE', 'Rodie'),
         ('MECHANIC', 'Mechanic'),
+        ('WORKSHOP', 'Workshop'),
         ('ADMIN', 'Admin'),
     )
 
@@ -191,6 +192,8 @@ class User(AbstractUser):
                 prefix = 'SP'
             elif self.role == 'MECHANIC':
                 prefix = 'IT'
+            elif self.role == 'WORKSHOP':
+                prefix = 'WS'
             elif self.role == 'ADMIN':
                 prefix = 'AD'
             else:
@@ -605,7 +608,8 @@ class AdminAuditLog(models.Model):
         ]
     
     def __str__(self):
-        return f"{self.admin_user.username} - {self.action_type} - {self.created_at}"
+        admin_name = self.admin_user.username if self.admin_user else "System"
+        return f"{admin_name} - {self.action_type} - {self.created_at}"
 
 
 class NotificationHistory(models.Model):

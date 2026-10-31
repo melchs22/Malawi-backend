@@ -836,9 +836,12 @@ class AdminWithdrawalDetailView(APIView):
                         target_entity_type='Payment',
                         target_entity_id=str(payment.id),
                         changes={
-                            'status': 'COMPLETED',
-                            'amount': str(payment.amount),
-                            'reference': payment.reference,
+                            'old': {'status': 'PENDING'},
+                            'new': {
+                                'status': 'COMPLETED',
+                                'amount': str(payment.amount),
+                                'reference': payment.reference,
+                            },
                         }
                     )
                 except Exception:
@@ -903,11 +906,14 @@ class AdminWithdrawalDetailView(APIView):
                         target_entity_type='Payment',
                         target_entity_id=str(payment.id),
                         changes={
-                            'status': new_status,
-                            'amount': str(payment.amount),
-                            'reference': payment.reference,
-                            'rejection_reason': rejection_reason,
-                            'refunded': True,
+                            'old': {'status': 'PENDING'},
+                            'new': {
+                                'status': new_status,
+                                'amount': str(payment.amount),
+                                'reference': payment.reference,
+                                'rejection_reason': rejection_reason,
+                                'refunded': True,
+                            },
                         }
                     )
                 except Exception:

@@ -81,7 +81,7 @@ class WebSocketService {
       await _closeConnection();
 
       final roleEndpoint = _role == "RIDER" ? "rider" : "rodie";
-      final url = "wss://backend.vehix.ug/ws/$roleEndpoint/?token=$token";
+      final url = "wss://smartmobilityroadcare.com/ws/$roleEndpoint/?token=$token";
       debugPrint("🌐 WebSocket: Connecting to: $url");
 
       // Set connection timeout

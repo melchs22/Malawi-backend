@@ -56,7 +56,7 @@ class BackgroundService : Service() {
         }
 
         // Always ensure foreground status to prevent crashes
-        val title = intent?.getStringExtra("title") ?: "Vehix Roadie"
+        val title = intent?.getStringExtra("title") ?: "SRS Mechanic"
         val text = intent?.getStringExtra("text") ?: "App is running in background"
         updateForegroundNotification(title, text)
 
@@ -204,7 +204,7 @@ class BackgroundService : Service() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serviceChannel = NotificationChannel(
                 CHANNEL_ID,
-                "Vehix Background Service",
+                "SRS Mechanic background service",
                 NotificationManager.IMPORTANCE_LOW
             )
             val manager = getSystemService(NotificationManager::class.java)

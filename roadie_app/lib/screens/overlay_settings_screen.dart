@@ -91,7 +91,7 @@ class _OverlaySettingsScreenState extends State<OverlaySettingsScreen> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('Overlay permission denied. Please enable it in Settings > Apps > Vehix Roadie.'),
+            content: Text('Overlay permission denied. Please enable it in Settings > Apps > SRS Mechanic.'),
             backgroundColor: Colors.red,
             duration: Duration(seconds: 5),
           ),
@@ -341,7 +341,7 @@ class _OverlaySettingsScreenState extends State<OverlaySettingsScreen> {
                       ),
                       const SizedBox(height: 4),
                       const Text(
-                        'Show Vehix widget when you\'re online',
+                        'Show SRS widget when you\'re online',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.white70,
@@ -387,14 +387,14 @@ class _OverlaySettingsScreenState extends State<OverlaySettingsScreen> {
             _buildInfoItem(
               icon: Icons.visibility,
               title: 'Always Visible When Online',
-              description: 'Small Vehix icon floats over other apps when you\'re available',
+              description: 'Small SRS icon floats over other apps when you\'re available',
               color: Colors.blue,
             ),
             const SizedBox(height: 8),
             _buildInfoItem(
               icon: Icons.touch_app,
               title: 'Quick Access',
-              description: 'Tap the widget to instantly return to the Vehix app',
+              description: 'Tap the widget to instantly return to the SRS app',
               color: Colors.green,
             ),
             const SizedBox(height: 8),

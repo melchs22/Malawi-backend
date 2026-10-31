@@ -2,9 +2,9 @@
 <resources>
     <color name="ic_launcher_background">#10223D</color>
     
-    <!-- Vehix Brand Colors -->
-    <color name="vehix_blue">#FF10223D</color>
-    <color name="vehix_orange">#FFFF8C00</color>
+    <!-- SRS Brand Colors -->
+    <color name="srs_blue">#FF10223D</color>
+    <color name="srs_orange">#FFFF8C00</color>
     
     <!-- Status Colors -->
     <color name="online_green">#FF4CAF50</color>

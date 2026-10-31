@@ -180,7 +180,7 @@ class _OverlayIntegrationExampleState extends State<OverlayIntegrationExample> {
                     ),
                     const SizedBox(width: 8),
                     const Text(
-                      'Roadie Dashboard',
+                      'Mechanic Dashboard',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24,
@@ -371,7 +371,7 @@ class _OverlayIntegrationExampleState extends State<OverlayIntegrationExample> {
                         '1. Go online to start receiving requests\n'
                         '2. The floating widget will appear when online\n'
                         '3. Switch to other apps to see the widget\n'
-                        '4. Tap the widget to return to Vehix\n'
+                        '4. Tap the widget to return to SRS\n'
                         '5. Requests will show alerts on the widget',
                         style: TextStyle(
                           color: Colors.blue,

@@ -479,7 +479,7 @@ class _WalletScreenState extends State<WalletScreen> {
               children: [
                 Icon(Icons.verified_user_outlined, size: 12, color: Colors.greenAccent),
                 SizedBox(width: 5),
-                Text('Secure Vehix Wallet', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                Text('Secure SRS Wallet', style: TextStyle(color: Colors.white70, fontSize: 12)),
               ],
             ),
           ),

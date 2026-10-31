@@ -113,7 +113,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 children: [
                   const Text(
-                    "Welcome to Vehix",
+                    "Welcome to SRS",
                     style: TextStyle(
                       color: Color(0xFF10223D),
                       fontSize: 32,
@@ -132,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    widget.role == 'RIDER' ? "Create your rider account" : "Create your roadie account",
+                    widget.role == 'RIDER' ? "Create your driver account" : "Create your mechanic account",
                     style: const TextStyle(
                       color: Color(0xFF10223D),
                       fontSize: 16,
@@ -175,7 +175,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 16),
                     _buildInputField(
                       ninController,
-                      widget.role == 'MECHANIC' ? "NIN (Required for Mechanics)" : "NIN (Required for Roadies)",
+                      "NIN (Required for Mechanics)",
                       Icons.credit_card,
                       keyboardType: TextInputType.number,
                     ),
@@ -216,7 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       baseline: TextBaseline.alphabetic,
                                       child: GestureDetector(
                                         onTap: () async {
-                                          final url = Uri.parse('https://vehix.ug/privacy-policy/');
+                                          final url = Uri.parse('https://smartmobilityroadcare.com/privacy-policy/');
                                           if (await canLaunchUrl(url)) {
                                             await launchUrl(url, mode: LaunchMode.externalApplication);
                                           }
@@ -237,7 +237,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       baseline: TextBaseline.alphabetic,
                                       child: GestureDetector(
                                         onTap: () async {
-                                          final url = Uri.parse('https://vehix.ug/terms-of-service/');
+                                          final url = Uri.parse('https://smartmobilityroadcare.com/terms-of-service/');
                                           if (await canLaunchUrl(url)) {
                                             await launchUrl(url, mode: LaunchMode.externalApplication);
                                           }
@@ -419,7 +419,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   title: const Text("Referral Code"),
                   content: const Text(
                     "Enter a referral code to get a welcome bonus!\n\n"
-                    "If someone invited you to join Vehix, ask them for their referral code.",
+                    "If someone invited you to join SRS, ask them for their referral code.",
                   ),
                   actions: [
                     TextButton(

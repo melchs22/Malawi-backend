@@ -3,12 +3,12 @@ class AppConfig {
   // Default to production URL; can be overridden at runtime
   static String apiBaseUrl = const String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'https://backend.vehix.ug/api',
+    defaultValue: 'https://smartmobilityroadcare.com/api',
   );
 
   static String wsBaseUrl = const String.fromEnvironment(
     'WS_BASE_URL',
-    defaultValue: 'wss://backend.vehix.ug/ws',
+    defaultValue: 'wss://smartmobilityroadcare.com/ws',
   );
 
   /// Set API base URL at runtime (e.g., for development/staging)
@@ -33,9 +33,9 @@ class AppConfig {
 
   // Certificate pinning configuration
   static const Map<String, List<String>> certificatePins = {
-    'backend.vehix.ug': [
+    'smartmobilityroadcare.com': [
       // Add your certificate pins here
-      // Run: openssl s_client -servername backend.vehix.ug -connect backend.vehix.ug:443 | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
+      // Run: openssl s_client -servername smartmobilityroadcare.com -connect smartmobilityroadcare.com:443 | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
       // Placeholder - update with actual certificate pins in production
       'sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
     ],

@@ -21,7 +21,7 @@ class MainActivity : FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, BACKGROUND_CHANNEL).setMethodCallHandler { call, result ->
             when (call.method) {
                 "initializeService" -> {
-                    val title = call.argument<String>("notificationTitle") ?: "Vehix Roadie"
+                    val title = call.argument<String>("notificationTitle") ?: "SRS Mechanic"
                     val text = call.argument<String>("notificationText") ?: "Online and ready"
                     val intent = Intent(this, BackgroundService::class.java)
                     intent.putExtra("title", title)

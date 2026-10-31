@@ -1,0 +1,29 @@
+name: Deploy backend
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, linux, x64, smr-production]
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    steps:
+      - name: Check out deployment commit
+        uses: actions/checkout@v4
+
+      - name: Deploy checked-out commit on the production runner
+        env:
+          DEPLOY_LOCAL: "1"
+          DEPLOY_REF: ${{ github.sha }}
+        run: bash ./scripts/deploy-production.sh

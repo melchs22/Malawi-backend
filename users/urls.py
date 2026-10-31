@@ -4,7 +4,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from .views import RegisterView, MeView, MyWalletView, MyReferralsView, RoadieStatusUpdateView, PlatformConfigView, NotificationListCreateView, NotificationRUDView, DepositView, WithdrawView, PesapalIPNView, RoadiePaymentsView, PaymentStatusView, UserProfileUpdateView, RegisterFcmTokenView, UserProfilePhotoUploadView, UserProfilePasswordChangeView, submit_feedback, PasswordResetRequestView, PasswordResetConfirmView, AccountDeletionEligibilityView, RequestAccountDeletionView
-from .tokens import CustomTokenObtainPairView, RiderLoginView, RoadieLoginView
+from .tokens import CustomTokenObtainPairView, RiderLoginView, RoadieLoginView, WorkshopLoginView
 from .admin_views import (
     RiderListCreateView,
     RiderRetrieveUpdateDestroyView,
@@ -76,6 +76,7 @@ urlpatterns = [
     path('login/', CustomTokenObtainPairView.as_view(), name='login'),
     path('login/rider/', RiderLoginView.as_view(), name='rider_login'),
     path('login/roadie/', RoadieLoginView.as_view(), name='roadie_login'),
+    path('login/workshop/', WorkshopLoginView.as_view(), name='workshop_login'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # Images alias (for KYC and profile)
     path('images/', include('images.urls')),

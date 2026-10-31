@@ -48,7 +48,7 @@ class SupportScreen extends StatelessWidget {
               subtitle: 'Learn about how we protect your data',
               icon: Icons.privacy_tip,
               onTap: () async {
-                final url = Uri.parse('https://vehix.ug/privacy-policy/');
+                final url = Uri.parse('https://smartmobilityroadcare.com/privacy-policy/');
                 if (await canLaunchUrl(url)) {
                   await launchUrl(url, mode: LaunchMode.externalApplication);
                 }
@@ -60,7 +60,7 @@ class SupportScreen extends StatelessWidget {
               subtitle: 'Read our terms of service',
               icon: Icons.description,
               onTap: () async {
-                final url = Uri.parse('https://vehix.ug/terms-of-service/');
+                final url = Uri.parse('https://smartmobilityroadcare.com/terms-of-service/');
                 if (await canLaunchUrl(url)) {
                   await launchUrl(url, mode: LaunchMode.externalApplication);
                 }
@@ -144,9 +144,9 @@ class ContactUsScreen extends StatelessWidget {
             _ContactCard(
               icon: Icons.email,
               title: 'Email',
-              subtitle: 'info@vehix.ug',
+              subtitle: 'support@smartmobilityroadcare.com',
               onTap: () async {
-                final url = Uri.parse('mailto:info@vehix.ug');
+                final url = Uri.parse('mailto:support@smartmobilityroadcare.com');
                 if (await canLaunchUrl(url)) {
                   await launchUrl(url);
                 }
@@ -184,7 +184,7 @@ class ContactUsScreen extends StatelessWidget {
               onTap: () async {
                 final String urlString = Platform.isIOS 
                     ? 'https://apps.apple.com/app/id6772772972?action=write-review'
-                    : 'https://play.google.com/store/apps/details?id=com.vehix.rider_app';
+                    : 'https://play.google.com/store/apps/details?id=com.smartmobility.rider_app';
                 final url = Uri.parse(urlString);
                 if (await canLaunchUrl(url)) {
                   await launchUrl(url, mode: LaunchMode.externalApplication);
@@ -335,7 +335,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
               'You can opt-out of marketing communications',
             ]),
             _buildSection('6. Contact Us', [
-              'If you have questions about this Privacy Policy, contact us at info@vehix.ug',
+              'If you have questions about this Privacy Policy, contact us at support@smartmobilityroadcare.com',
             ]),
           ],
         ),
@@ -399,10 +399,10 @@ class TermsConditionsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 24),
             _buildSection('1. Acceptance of Terms', [
-              'By using Vehix, you agree to these Terms & Conditions.',
+              'By using SRS, you agree to these Terms & Conditions.',
             ]),
             _buildSection('2. Service Description', [
-              'Vehix is a platform connecting riders with roadie service providers.',
+              'SRS is a platform connecting drivers with mechanics.',
             ]),
             _buildSection('3. User Responsibilities', [
               'Provide accurate information',
@@ -427,7 +427,7 @@ class TermsConditionsScreen extends StatelessWidget {
               'Violating local laws',
             ]),
             _buildSection('7. Limitation of Liability', [
-              'Vehix is a platform, not a direct service provider',
+              'SRS is a platform, not a direct service provider',
               'We are not liable for the actions of independent service providers',
               'Our liability is limited as described in these terms',
             ]),
@@ -445,7 +445,7 @@ class TermsConditionsScreen extends StatelessWidget {
               'Continued use indicates acceptance of changes',
             ]),
             _buildSection('Contact Us', [
-              'Contact us at info@vehix.ug for questions about these terms.',
+              'Contact us at support@smartmobilityroadcare.com for questions about these terms.',
             ]),
           ],
         ),

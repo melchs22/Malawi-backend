@@ -24,7 +24,7 @@ class OverlayService {
   
   // Platform channels for native overlay
   static const MethodChannel _channel = MethodChannel('vehix/overlay');
-  static const MethodChannel _backgroundChannel = MethodChannel('vehix/background');
+  static const MethodChannel _backgroundChannel = MethodChannel('srs/background');
   
   // State management
   bool _isInitialized = false;
@@ -114,7 +114,7 @@ class OverlayService {
     try {
       await _channel.invokeMethod('showOverlay', {
         'isOnline': _isRoadieOnline,
-        'appIcon': 'assets/app.png',
+        'appIcon': 'assets/smart_mobility_logo.png',
       });
       _isOverlayVisible = true;
       _overlayStateController.add(true);
@@ -266,7 +266,7 @@ class OverlayService {
     if (!Platform.isAndroid) return;
     try {
       await _backgroundChannel.invokeMethod('initializeService', {
-        'notificationTitle': 'Vehix Roadie',
+        'notificationTitle': 'SRS Mechanic',
         'notificationText': 'Ready to assist roadside',
       });
       print('🎯 Background service initialized');

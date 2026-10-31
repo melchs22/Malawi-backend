@@ -1,6 +1,9 @@
 Vehix Backend — Setup & Production Guide
 ======================================
 
+For the production PC/SSH deployment and push-triggered GitHub Actions workflow,
+see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
 This README explains how to run and deploy the Vehix backend locally and in production. It is written for beginners and focuses on using the Docker setup included in `config/docker-compose.yml`.
 
 Quick overview

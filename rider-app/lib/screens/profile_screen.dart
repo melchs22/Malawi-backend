@@ -445,12 +445,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         
         if (difference.inDays >= 365) {
           final years = (difference.inDays / 365).floor();
-          timeOnPlatform = "$years Year${years > 1 ? 's' : ''} with Vehix";
+          timeOnPlatform = "$years Year${years > 1 ? 's' : ''} with SRS";
         } else if (difference.inDays >= 30) {
           final months = (difference.inDays / 30).floor();
-          timeOnPlatform = "$months Month${months > 1 ? 's' : ''} with Vehix";
+          timeOnPlatform = "$months Month${months > 1 ? 's' : ''} with SRS";
         } else {
-          timeOnPlatform = "${difference.inDays} Day${difference.inDays > 1 ? 's' : ''} with Vehix";
+          timeOnPlatform = "${difference.inDays} Day${difference.inDays > 1 ? 's' : ''} with SRS";
         }
       } catch (e) {
         // Keep default if parsing fails
@@ -777,7 +777,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 20),
                 const Text(
-                  'Optional: Reason for leaving Vehix?',
+                  'Optional: Reason for leaving SRS?',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
@@ -876,7 +876,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(height: 12),
           Text(
-            "Request to permanently delete your Vehix account and data. This action is irreversible once fully processed.",
+            "Request to permanently delete your SRS account and data. This action is irreversible once fully processed.",
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey[700],

@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               context: context,
               builder: (context) => AlertDialog(
                 title: const Center(child: Text("Account Approval Pending", style: TextStyle(fontWeight: FontWeight.bold))),
-                content: const Text("You'll be notified once your Vehix account is approved to go online.", textAlign: TextAlign.center),
+                content: const Text("You'll be notified once your SRS account is approved to go online.", textAlign: TextAlign.center),
                 actions: [
                   TextButton(onPressed: () => Navigator.pop(context), child: const Text("OK", style: TextStyle(color: Color(0xFFFF8C00)))),
                 ],
@@ -275,7 +275,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         barrierDismissible: false,
         builder: (context) => AlertDialog(
           title: const Text("Location Access Required"),
-          content: const Text("Vehix Roadie needs your location to find nearby emergency roadside requests and track your arrival time, even when the app is closed or not in use."),
+          content: const Text("SRS Mechanic needs your location to find nearby emergency roadside requests and track your arrival time, even when the app is closed or not in use."),
           actions: [
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
@@ -315,7 +315,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           barrierDismissible: false,
           builder: (context) => AlertDialog(
             title: const Text("Overlay Permission Required"),
-            content: const Text("Vehix needs permission to display over other apps so you can receive service requests even when using other apps or when your phone is locked."),
+            content: const Text("SRS needs permission to display over other apps so you can receive service requests even when using other apps or when your phone is locked."),
             actions: [
               TextButton(
                 onPressed: () async {
@@ -451,7 +451,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
         if (mounted) {
           _playCancellationSound();
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Rider has cancelled the request"), backgroundColor: Colors.orange),
+            const SnackBar(content: Text("Driver has cancelled the request"), backgroundColor: Colors.orange),
           );
         }
       } else if (messageType == "rodie_location" || messageType == "nearby_list" || messageType == "rodie_status") {
@@ -702,7 +702,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 },
               ),
               children: [
-                TileLayer(urlTemplate: _tileTemplate, subdomains: const ['a', 'b', 'c', 'd'], userAgentPackageName: 'com.vehix.roadie'),
+                TileLayer(urlTemplate: _tileTemplate, subdomains: const ['a', 'b', 'c', 'd'], userAgentPackageName: 'com.srs.roadie'),
                 MarkerLayer(markers: [
                   if (currentLocation != null && currentLocation!.latitude != 0.0) 
                     Marker(point: currentLocation!, width: 60, height: 60, child: _buildLocationMarker())
@@ -726,7 +726,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 
   Widget _buildStatusBanner() {
-    String subtitle = _isOnline ? "Waiting for requests" : "Riders need your help. Go online to assist.";
+    String subtitle = _isOnline ? "Waiting for requests" : "Drivers need your help. Go online to assist.";
     bool isApproved = userData?['is_approved'] == true;
     bool servicesSelected = userData?['services_selected'] == true;
     final double balance = double.tryParse(userData?['wallet']?['balance']?.toString() ?? '0.0') ?? 0.0;
@@ -766,7 +766,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                 final bool servicesSelected = userData?['services_selected'] == true;
                 final bool isBalanceExceeded = currentBalance < -currentMaxNeg;
 
-                if (!isApproved) { _showCheckDialog("Account Pending Approval", "You’ll be notified once your Vehix account is approved to go online."); return; }
+                if (!isApproved) { _showCheckDialog("Account Pending Approval", "You’ll be notified once your SRS account is approved to go online."); return; }
                 if (!servicesSelected) { _showCheckDialog("Select a service", "Please select at least one service you intend to provide before going online."); return; }
                 if (isBalanceExceeded) { _showCheckDialog("Balance Exceeded", "Your negative balance (UGX $currentBalance) exceeds the allowed limit (UGX $currentMaxNeg). Please settle your balance in the wallet to go online."); return; }
 

@@ -142,7 +142,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             const SizedBox(height: 10),
             _buildInfoRow(Icons.tag_outlined, 'Job ID', '#$jobId'),
             const SizedBox(height: 10),
-            _buildInfoRow(Icons.person_outline, 'Roadie', rodieUsername),
+            _buildInfoRow(Icons.person_outline, 'Mechanic', rodieUsername),
           ],
         ),
       ),

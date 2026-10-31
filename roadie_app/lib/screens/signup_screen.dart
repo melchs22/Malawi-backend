@@ -123,7 +123,7 @@ class _SignupScreenState extends State<SignupScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xFF10223D),
         foregroundColor: Colors.white,
-        title: const Text("Roadie Signup"),
+        title: const Text("Mechanic Signup"),
         centerTitle: true,
         elevation: 0,
       ),

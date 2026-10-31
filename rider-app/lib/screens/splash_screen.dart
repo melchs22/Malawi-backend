@@ -126,7 +126,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Hero(
           tag: 'app_logo',
           child: Image.asset(
-            'assets/rider.png',
+            'assets/smart_mobility_logo.png',
             height: 120,
             fit: BoxFit.contain,
           ),

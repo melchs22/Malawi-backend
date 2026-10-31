@@ -119,6 +119,15 @@ class RoadieTokenObtainPairSerializer(CustomTokenObtainPairSerializer):
             raise serializers.ValidationError('This account is not a Roadie account.')
         return data
 
+class WorkshopTokenObtainPairSerializer(CustomTokenObtainPairSerializer):
+    target_role = 'WORKSHOP'
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        if self.user.role != 'WORKSHOP':
+            raise serializers.ValidationError('This account is not a Workshop account.')
+        return data
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
@@ -127,3 +136,6 @@ class RiderLoginView(TokenObtainPairView):
 
 class RoadieLoginView(TokenObtainPairView):
     serializer_class = RoadieTokenObtainPairSerializer
+
+class WorkshopLoginView(TokenObtainPairView):
+    serializer_class = WorkshopTokenObtainPairSerializer

@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Vehix SP</string>
+	<string>SRS Mechanic</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -80,13 +80,13 @@
 		<string>dev.flutter.background.refresh</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Vehix needs your location to show you nearby requests and track your progress while on a job.</string>
+	<string>SRS Mechanic uses your location to show nearby driver requests and share your position while working.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Vehix needs your location to track your route in the background while you are on an active job.</string>
+	<string>SRS Mechanic uses your location to share your route with the driver during an active service request.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Vehix needs access to your camera so you can take photos of your license and profile.</string>
+	<string>SRS Mechanic uses your camera to photograph your license and profile picture.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Vehix needs access to your photo library so you can upload your license and profile pictures.</string>
+	<string>SRS Mechanic uses your photo library to select your license and profile pictures.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

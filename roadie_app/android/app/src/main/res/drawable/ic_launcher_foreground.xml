@@ -5,7 +5,7 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
     
-    <!-- Vehix V Logo for Roadie App (White on Blue) -->
+    <!-- SRS V Logo for Roadie App (White on Blue) -->
     <path
         android:fillColor="#FFFFFFFF"
         android:pathData="M54,9L18,34.5V54C18,76.5 33.75,92.25 54,99C74.25,92.25 90,76.5 90,54V34.5L54,9ZM54,18L81,36V49.5C81,67.5 69,82.5 54,88.5C39,82.5 27,67.5 27,49.5V36L54,18ZM54,27L40.5,40.5H49.5V67.5H58.5V40.5H67.5L54,27Z" />

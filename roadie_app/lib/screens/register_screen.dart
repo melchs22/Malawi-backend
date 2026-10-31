@@ -62,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (widget.role == 'RODIE') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text("You’ll be notified once your Vehix account is approved to go online."),
+            content: Text("You’ll be notified once your SRS account is approved to go online."),
             backgroundColor: Colors.green,
             duration: Duration(seconds: 5),
           ),
@@ -138,7 +138,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   const SizedBox(height: 20),
                   const Text(
-                    "Welcome to Vehix",
+                    "Welcome to SRS",
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -159,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    widget.role == 'RODIE' ? "Create your roadie account" : "Create your ${widget.role.toLowerCase()} account",
+                    widget.role == 'RODIE' ? "Create your mechanic account" : "Create your ${widget.role.toLowerCase()} account",
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white70,
@@ -226,7 +226,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               title: const Text("Referral Code", style: TextStyle(color: Colors.white)),
                               content: const Text(
                                 "Enter a referral code to get a welcome bonus!\n\n"
-                                "If someone invited you to join Vehix, ask them for their referral code.",
+                                "If someone invited you to join SRS, ask them for their referral code.",
                                 style: TextStyle(color: Colors.white70),
                               ),
                               actions: [
@@ -292,7 +292,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   baseline: TextBaseline.alphabetic,
                                   child: GestureDetector(
                                     onTap: () async {
-                                      final url = Uri.parse('https://vehix.ug/privacy-policy/');
+                                      final url = Uri.parse('https://smartmobilityroadcare.com/privacy-policy/');
                                       if (await canLaunchUrl(url)) {
                                         await launchUrl(url, mode: LaunchMode.externalApplication);
                                       }
@@ -306,7 +306,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   baseline: TextBaseline.alphabetic,
                                   child: GestureDetector(
                                     onTap: () async {
-                                      final url = Uri.parse('https://vehix.ug/terms-of-service/');
+                                      final url = Uri.parse('https://smartmobilityroadcare.com/terms-of-service/');
                                       if (await canLaunchUrl(url)) {
                                         await launchUrl(url, mode: LaunchMode.externalApplication);
                                       }

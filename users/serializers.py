@@ -74,6 +74,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         email = data.get('email')
         phone = data.get('phone')
 
+        if role == 'WORKSHOP':
+            raise serializers.ValidationError({
+                'role': 'Workshop accounts are created through service-centre registration and admin approval.'
+            })
+
         # NIN is required only for RODIE and MECHANIC roles, not for RIDER
         if role in ('RODIE', 'MECHANIC'):
             if not nin:

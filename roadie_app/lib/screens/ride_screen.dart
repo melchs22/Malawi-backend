@@ -119,7 +119,7 @@ class _RideScreenState extends State<RideScreen> {
         if (!_isCancelled) {
           _isCancelled = true;
           _playCancellationSound();
-          _showRideCancelledInfoDialog(data["message"] ?? "The Rider has cancelled this request.");
+          _showRideCancelledInfoDialog(data["message"] ?? "The Driver has cancelled this request.");
         }
       } else if (typeLower == "ws_reconnected") {
         debugPrint("🔄 [Roadie] WS reconnected, re-joining request room");
@@ -143,7 +143,7 @@ class _RideScreenState extends State<RideScreen> {
           if (!_isChatOpen && mounted && !isDuplicate) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('${data["sender_name"] ?? "Rider"}: ${data["text"]}'),
+                content: Text('${data["sender_name"] ?? "Driver"}: ${data["text"]}'),
                 duration: const Duration(seconds: 3),
                 backgroundColor: const Color(0xFF10223D),
                 behavior: SnackBarBehavior.floating,
@@ -704,7 +704,7 @@ class _RideScreenState extends State<RideScreen> {
     
     if (riderLat == null || riderLng == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Rider location not available")),
+        const SnackBar(content: Text("Driver location not available")),
       );
       return;
     }
@@ -713,7 +713,7 @@ class _RideScreenState extends State<RideScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Navigate to Rider"),
+          title: const Text("Navigate to Driver"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -825,7 +825,7 @@ class _RideScreenState extends State<RideScreen> {
 
     String name = currentRequest["rider_username"]?.toString() ?? 
                   widget.request["rider_username"]?.toString() ?? 
-                  "Rider";
+                  "Driver";
                   
     if (counterpart is Map && counterpart["username"] != null && counterpart["username"].toString().isNotEmpty) {
       name = counterpart["username"].toString();
@@ -902,7 +902,7 @@ class _RideScreenState extends State<RideScreen> {
                                       ),
                                     ),
                                     const Text(
-                                      "Assisting Rider",
+                                      "Assisting Driver",
                                       style: TextStyle(
                                         color: Colors.white70,
                                         fontSize: 14,
@@ -927,7 +927,7 @@ class _RideScreenState extends State<RideScreen> {
                                     if (phone == null || phone.toString().isEmpty) {
                                       if (mounted) {
                                         ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(content: Text("Rider phone number not available")),
+                                          const SnackBar(content: Text("Driver phone number not available")),
                                         );
                                       }
                                       return;
@@ -981,7 +981,7 @@ class _RideScreenState extends State<RideScreen> {
                                 urlTemplate: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
                                 subdomains: const ['a', 'b', 'c', 'd'],
                                 retinaMode: RetinaMode.isHighDensity(context),
-                                userAgentPackageName: 'com.vehix.roadie',
+                                userAgentPackageName: 'com.srs.roadie',
                               ),
                               MarkerLayer(
                                 markers: [
@@ -1233,7 +1233,7 @@ class _RideScreenState extends State<RideScreen> {
                   const Padding(
                     padding: EdgeInsets.only(top: 4),
                     child: Text(
-                      "Make sure you have reached the rider first",
+                      "Make sure you have reached the driver first",
                       style: TextStyle(fontSize: 12, color: Colors.grey),
                       textAlign: TextAlign.center,
                     ),
@@ -1320,7 +1320,7 @@ class _RideScreenState extends State<RideScreen> {
     final riderName = currentRequest["rider_username"]?.toString() ?? 
                      widget.request["rider_username"]?.toString() ?? 
                      currentRequest["rider_name"] ?? 
-                     widget.request["rider_name"] ?? "Rider";
+                     widget.request["rider_name"] ?? "Driver";
     return AnimatedPositioned(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOutCubic,
@@ -1382,7 +1382,7 @@ class _RideScreenState extends State<RideScreen> {
                               Icon(Icons.chat_bubble_outline, size: 48, color: Colors.grey),
                               SizedBox(height: 12),
                               Text(
-                                "No messages yet.\nSend a message to the rider.",
+                                "No messages yet.\nSend a message to the driver.",
                                 style: TextStyle(color: Colors.grey, fontSize: 14),
                                 textAlign: TextAlign.center,
                               ),
@@ -1398,7 +1398,7 @@ class _RideScreenState extends State<RideScreen> {
                             final msg = messages[messages.length - 1 - index];
                             final isMe = msg["sender_role"] == "RODIE";
                             final time = _formatMessageTime(msg["created_at"]?.toString());
-                            final senderName = isMe ? null : (msg["sender_name"] ?? "Rider");
+                            final senderName = isMe ? null : (msg["sender_name"] ?? "Driver");
 
                             return Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4),
@@ -1556,4 +1556,3 @@ class _RideScreenState extends State<RideScreen> {
     );
   }
 }
-

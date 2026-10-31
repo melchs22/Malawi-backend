@@ -76,7 +76,7 @@ class _RequestingScreenState extends State<RequestingScreen>
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('No Roadies Available'),
+        title: const Text('No Mechanics Available'),
         content: const Text(
           'Unfortunately, no service providers are available right now. Please try again later.',
         ),
@@ -460,7 +460,7 @@ class _RequestingScreenState extends State<RequestingScreen>
               if (didPop) return;
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text("Please wait for a Roadie or cancel."),
+                  content: Text("Please wait for a Mechanic or cancel."),
                 ),
               );
             },
@@ -488,7 +488,7 @@ class _RequestingScreenState extends State<RequestingScreen>
               ),
               const SizedBox(height: 12),
               Text(
-                "Searching for nearby Roadies...",
+                "Searching for nearby Mechanics...",
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey.shade600,
@@ -579,7 +579,7 @@ class _RequestingScreenState extends State<RequestingScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Nearest Roadie: ${_distance!.toStringAsFixed(1)} km",
+                              "Nearest Mechanic: ${_distance!.toStringAsFixed(1)} km",
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -700,4 +700,3 @@ class _RequestingScreenState extends State<RequestingScreen>
     );
   }
 }
-

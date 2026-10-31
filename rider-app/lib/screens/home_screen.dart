@@ -420,7 +420,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 'id': roadieId,
                 'lat': double.tryParse(data["lat"].toString()) ?? 0.0,
                 'lng': double.tryParse(data["lng"].toString()) ?? 0.0,
-                'username': data["username"] ?? "Roadie",
+                'username': data["username"] ?? "Mechanic",
               };
               final index = roadieData.indexWhere((r) => r['id'] == roadieId);
               if (index != -1) {
@@ -440,7 +440,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'id': roadieId,
                     'lat': double.tryParse(lat.toString()) ?? 0.0,
                     'lng': double.tryParse(lng.toString()) ?? 0.0,
-                    'username': roadie["username"] ?? "Roadie",
+                    'username': roadie["username"] ?? "Mechanic",
                   });
                 }
               }
@@ -458,7 +458,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'id': roadieId,
                     'lat': double.tryParse(lat.toString()) ?? 0.0,
                     'lng': double.tryParse(lng.toString()) ?? 0.0,
-                    'username': statusData["username"] ?? "Roadie",
+                    'username': statusData["username"] ?? "Mechanic",
                   };
                   final index = roadieData.indexWhere((r) => r['id'] == roadieId);
                   if (index != -1) {
@@ -615,7 +615,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               children: [
-                TileLayer(urlTemplate: _tileTemplate, subdomains: const ['a', 'b', 'c', 'd'], userAgentPackageName: 'com.vehix.rider'),
+                TileLayer(urlTemplate: _tileTemplate, subdomains: const ['a', 'b', 'c', 'd'], userAgentPackageName: 'com.srs.rider'),
                 MarkerLayer(markers: [
                   if (currentLocation != null && currentLocation!.latitude != 0.0)
                     Marker(point: currentLocation!, width: 60, height: 60, child: _buildUserMarker()),

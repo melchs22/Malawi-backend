@@ -35,7 +35,7 @@ class HelpScreen extends StatelessWidget {
             _ContactTile(
               icon: Icons.email_outlined,
               title: 'Email Us',
-              subtitle: 'support@vehix.ug',
+              subtitle: 'support@smartmobilityroadcare.com',
             ),
             SizedBox(height: 16),
             _ContactTile(

@@ -69,7 +69,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   backgroundColor: Colors.white,
                   backgroundImage: _profilePhotoUrl != null
                       ? NetworkImage(_profilePhotoUrl!)
-                      : const AssetImage('assets/logo.jpeg') as ImageProvider,
+                      : const AssetImage('assets/smart_mobility_logo.png') as ImageProvider,
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -191,4 +191,3 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 }
-

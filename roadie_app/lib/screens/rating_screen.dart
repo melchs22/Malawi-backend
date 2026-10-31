@@ -74,11 +74,11 @@ class _RatingScreenState extends State<RatingScreen> {
   Widget build(BuildContext context) {
     final counterpart = widget.request["rider"];
 
-    String name = "Rider";
+    String name = "Driver";
     if (counterpart is Map && counterpart["first_name"] != null) {
       name = "${counterpart["first_name"]} ${counterpart["last_name"] ?? ""}".trim();
     } else {
-      name = widget.request["rider_name"]?.toString() ?? "Rider";
+      name = widget.request["rider_name"]?.toString() ?? "Driver";
     }
 
     return Scaffold(

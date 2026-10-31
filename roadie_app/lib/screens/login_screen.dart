@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
           content: const Text(
             "Unable to log in. Please ensure:\n"
             "- Username, email, phone number, and password are correct\n"
-            "- You are logging into the correct user role (Rider or Roadie)",
+            "- You are logging into the correct user role (Driver or Mechanic)",
           ),
           actions: [
             TextButton(
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Hero(
                       tag: 'logo',
                       child: Image.asset(
-                        'assets/app.png',
+                        'assets/smart_mobility_logo.png',
                         height: 120,
                         fit: BoxFit.contain,
                       ),
@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 40),
                   const Text(
-                    "Welcome Roadie",
+                    "Welcome Mechanic",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 28,

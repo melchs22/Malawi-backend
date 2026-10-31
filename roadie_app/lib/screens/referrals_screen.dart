@@ -37,7 +37,7 @@ class _ReferralsScreenState extends State<ReferralsScreen> {
     
     if (mounted) {
       setState(() {
-        referralCode = (user != null ? user["referral_code"] : null) ?? "VEHIX2024";
+        referralCode = (user != null ? user["referral_code"] : null) ?? "SRS2024";
         referrals = data;
         totalEarnings = earnings;
         totalReferrals = data.length;
@@ -47,13 +47,13 @@ class _ReferralsScreenState extends State<ReferralsScreen> {
   }
 
   void _shareNative() async {
-    String baseUrl = "https://vehix.ug";
-    String message = "🚀 *Invite Roadies/Riders & Earn UGX 1,000!*\n\n"
+    String baseUrl = "https://smartmobilityroadcare.com";
+    String message = "🚀 *Invite Drivers and Mechanics & Earn UGX 1,000!*\n\n"
                      "Use my referral code: *$referralCode*\n\n"
                      "Download now: $baseUrl\n"
-                     "Share your code and earn UGX 1,000 when new roadies/riders complete their first Job/Assist!";
+                     "Share your code and earn UGX 1,000 when new drivers or mechanics complete their first Job/Assist!";
     
-    await Share.share(message, subject: 'Join Vehix Platform');
+    await Share.share(message, subject: 'Join SRS Platform');
   }
 
   void _copyCode() {
@@ -146,7 +146,7 @@ class _ReferralsScreenState extends State<ReferralsScreen> {
                           ),
                           const SizedBox(height: 16),
                           const Text(
-                            "Invite Roadies/Riders & Earn",
+                            "Invite Drivers and Mechanics & Earn",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -155,7 +155,7 @@ class _ReferralsScreenState extends State<ReferralsScreen> {
                           ),
                           const SizedBox(height: 8),
                           const Text(
-                            "Share your code and earn UGX 1,000 when new roadies/riders complete their first Job/Assist!",
+                            "Share your code and earn UGX 1,000 when new drivers or mechanics complete their first Job/Assist!",
                             textAlign: TextAlign.center,
                             style: TextStyle(color: Colors.white70),
                           ),

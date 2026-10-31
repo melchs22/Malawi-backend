@@ -23,7 +23,7 @@ class SupportTicketSerializer(serializers.ModelSerializer):
 
 class AdminAuditLogSerializer(serializers.ModelSerializer):
     """Serializer for admin audit logs"""
-    admin_username = serializers.CharField(source='admin_user.username', read_only=True)
+    admin_username = serializers.SerializerMethodField()
     target_username = serializers.CharField(source='target_user.username', read_only=True, allow_null=True)
     
     class Meta:
@@ -34,6 +34,32 @@ class AdminAuditLogSerializer(serializers.ModelSerializer):
             'changes', 'created_at', 'ip_address'
         )
         read_only_fields = ('created_at',)
+
+    def get_admin_username(self, obj):
+        return obj.admin_user.username if obj.admin_user else "System"
+
+
+class AdminAuditLogCreateSerializer(serializers.ModelSerializer):
+    """Validate audit records submitted by authenticated admin dashboard actions."""
+
+    action_type = serializers.CharField(max_length=50)
+
+    class Meta:
+        model = AdminAuditLog
+        fields = (
+            'action_type', 'action_description', 'target_entity_type',
+            'target_entity_id', 'changes'
+        )
+        extra_kwargs = {
+            'target_entity_type': {'required': False},
+            'target_entity_id': {'required': False},
+            'changes': {'required': False},
+        }
+
+    def validate_changes(self, value):
+        if not isinstance(value, dict):
+            raise serializers.ValidationError("Changes must be an object.")
+        return value
 
 
 class NotificationHistorySerializer(serializers.ModelSerializer):

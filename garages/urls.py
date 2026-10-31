@@ -1,29 +1,70 @@
 from django.urls import path
 from .views import (
-    GarageRegistrationView, GarageListView, GarageDetailView,
-    GarageServiceRequestCreateView, RiderGarageRequestsView, GarageRequestsView,
-    AdminGarageListView, AdminGarageDetailView, AdminGarageVerificationView,
-    AdminGarageStatsView
+    AdminGarageAuditListView,
+    AdminGarageDetailView,
+    AdminGarageInvoiceListView,
+    AdminGarageInvoiceSettlementView,
+    AdminGarageListView,
+    AdminGarageReviewListView,
+    AdminGarageStatsView,
+    AdminGarageVerificationView,
+    AdminWorkshopRequestListView,
+    GarageApplicationStatusView,
+    GarageDetailView,
+    GarageListView,
+    GarageRegistrationView,
+    GarageRequestsView,
+    GarageServiceRequestCreateView,
+    PayChanguCallbackView,
+    PayChanguWebhookView,
+    RiderGarageRequestCancelView,
+    RiderGarageReviewCreateView,
+    RiderGarageRequestsView,
+    RiderInvoiceCheckoutView,
+    RiderInvoicePaymentVerifyView,
+    RiderQuoteResponseView,
+    WorkshopGarageProfileView,
+    WorkshopQuoteView,
+    WorkshopRequestCompleteView,
+    WorkshopRequestDetailView,
+    WorkshopRequestDeclineView,
+    WorkshopRequestStartView,
 )
 
 app_name = 'garages'
 
 urlpatterns = [
-    # Public endpoints for garage partners
     path('register/', GarageRegistrationView.as_view(), name='garage_register'),
-
-    # Endpoints for riders
+    path('application-status/', GarageApplicationStatusView.as_view(), name='garage_application_status'),
+    path('payments/callback/', PayChanguCallbackView.as_view(), name='paychangu_callback'),
+    path('payments/webhook/', PayChanguWebhookView.as_view(), name='paychangu_webhook'),
+    path('payments/<str:tx_ref>/verify/', RiderInvoicePaymentVerifyView.as_view(), name='garage_payment_verify'),
+    path('invoices/<int:pk>/checkout/', RiderInvoiceCheckoutView.as_view(), name='garage_invoice_checkout'),
     path('', GarageListView.as_view(), name='garage_list'),
     path('<int:pk>/', GarageDetailView.as_view(), name='garage_detail'),
     path('<int:pk>/request/', GarageServiceRequestCreateView.as_view(), name='garage_service_request'),
     path('requests/', RiderGarageRequestsView.as_view(), name='rider_garage_requests'),
-
-    # Endpoints for garages (future implementation)
+    path('requests/<int:pk>/cancel/', RiderGarageRequestCancelView.as_view(), name='rider_garage_request_cancel'),
+    path('requests/<int:pk>/review/', RiderGarageReviewCreateView.as_view(), name='rider_garage_review'),
+    path(
+        'requests/<int:pk>/quotes/<int:quote_id>/respond/',
+        RiderQuoteResponseView.as_view(),
+        name='rider_garage_quote_respond',
+    ),
+    path('garage/profile/', WorkshopGarageProfileView.as_view(), name='workshop_profile'),
     path('garage/requests/', GarageRequestsView.as_view(), name='garage_requests'),
-
-    # Admin endpoints
+    path('garage/requests/<int:pk>/', WorkshopRequestDetailView.as_view(), name='workshop_request_detail'),
+    path('garage/requests/<int:pk>/quote/', WorkshopQuoteView.as_view(), name='workshop_request_quote'),
+    path('garage/requests/<int:pk>/decline/', WorkshopRequestDeclineView.as_view(), name='workshop_request_decline'),
+    path('garage/requests/<int:pk>/start/', WorkshopRequestStartView.as_view(), name='workshop_request_start'),
+    path('garage/requests/<int:pk>/complete/', WorkshopRequestCompleteView.as_view(), name='workshop_request_complete'),
+    path('admin/requests/', AdminWorkshopRequestListView.as_view(), name='admin_garage_requests'),
+    path('admin/reviews/', AdminGarageReviewListView.as_view(), name='admin_garage_reviews'),
+    path('admin/invoices/', AdminGarageInvoiceListView.as_view(), name='admin_garage_invoices'),
+    path('admin/invoices/<int:pk>/settlements/', AdminGarageInvoiceSettlementView.as_view(), name='admin_garage_invoice_settle'),
     path('admin/', AdminGarageListView.as_view(), name='admin_garage_list'),
     path('admin/<int:pk>/', AdminGarageDetailView.as_view(), name='admin_garage_detail'),
     path('admin/<int:pk>/verify/', AdminGarageVerificationView.as_view(), name='admin_garage_verify'),
+    path('admin/<int:pk>/audit/', AdminGarageAuditListView.as_view(), name='admin_garage_audit'),
     path('admin/stats/', AdminGarageStatsView.as_view(), name='admin_garage_stats'),
 ]

@@ -1,7 +1,8 @@
-import random
+import secrets
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.throttling import ScopedRateThrottle
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -774,10 +775,11 @@ def submit_feedback(request):
 
 
 from django.core.mail import send_mail
-import random
 
 class PasswordResetRequestView(APIView):
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'password_reset'
 
     def post(self, request):
         email = request.data.get('email')
@@ -787,12 +789,13 @@ class PasswordResetRequestView(APIView):
             return Response({'error': 'Email and role are required'}, status=status.HTTP_400_BAD_REQUEST)
 
         user = User.objects.filter(email=email, role=role).first()
-        if not user:
+        if not user or not user.is_active:
             # We return 200 even if user not found for security (don't reveal registered emails)
             return Response({'message': 'If an account exists, a code has been sent.'}, status=status.HTTP_200_OK)
 
         # Generate 6-digit OTP
-        token_str = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+        PasswordResetToken.objects.filter(user=user, is_used=False).update(is_used=True)
+        token_str = f'{secrets.randbelow(1_000_000):06d}'
         PasswordResetToken.objects.create(user=user, token=token_str)
 
         # Send email
@@ -812,6 +815,8 @@ class PasswordResetRequestView(APIView):
 
 class PasswordResetConfirmView(APIView):
     permission_classes = [permissions.AllowAny]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'password_reset_confirm'
 
     def post(self, request):
         email = request.data.get('email')
@@ -823,13 +828,21 @@ class PasswordResetConfirmView(APIView):
             return Response({'error': 'Missing required fields'}, status=status.HTTP_400_BAD_REQUEST)
 
         user = User.objects.filter(email=email, role=role).first()
-        if not user:
+        if not user or not user.is_active:
             return Response({'error': 'Invalid request'}, status=status.HTTP_400_BAD_REQUEST)
 
         reset_token = PasswordResetToken.objects.filter(user=user, token=token_str, is_used=False).last()
 
         if not reset_token or not reset_token.is_valid():
             return Response({'error': 'Invalid or expired code'}, status=status.HTTP_400_BAD_REQUEST)
+
+        from django.contrib.auth.password_validation import validate_password
+        from django.core.exceptions import ValidationError as DjangoValidationError
+
+        try:
+            validate_password(new_password, user=user)
+        except DjangoValidationError as error:
+            return Response({'error': error.messages}, status=status.HTTP_400_BAD_REQUEST)
 
         # Update password
         user.set_password(new_password)

@@ -2,6 +2,7 @@ from rest_framework import generics, viewsets, filters, status, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.pagination import PageNumberPagination
 from .admin_views import IsAdminRole
 try:
     from django_filters.rest_framework import DjangoFilterBackend
@@ -15,7 +16,7 @@ from .models import (
     ReferralSummary, Referral, User
 )
 from .support_serializers import (
-    SupportTicketSerializer, AdminAuditLogSerializer, NotificationHistorySerializer,
+    SupportTicketSerializer, AdminAuditLogSerializer, AdminAuditLogCreateSerializer, NotificationHistorySerializer,
     ReferralSummarySerializer, ReferralDetailSerializer, ReferralCreateSerializer
 )
 
@@ -89,12 +90,19 @@ class SupportTicketViewSet(viewsets.ModelViewSet):
         return Response(SupportTicketSerializer(ticket).data)
 
 
+class AuditLogPagination(PageNumberPagination):
+    page_size = 50
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
 class AdminAuditLogViewSet(viewsets.ReadOnlyModelViewSet):
     """
     ViewSet for viewing audit logs (read-only for accountability)
     Only admins can access this
     """
     serializer_class = AdminAuditLogSerializer
+    pagination_class = AuditLogPagination
     permission_classes = [permissions.IsAuthenticated, IsAdminRole]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['action_type', 'admin_user', 'created_at']
@@ -104,6 +112,18 @@ class AdminAuditLogViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return AdminAuditLog.objects.all().select_related('admin_user', 'target_user')
+
+    def create(self, request, *args, **kwargs):
+        serializer = AdminAuditLogCreateSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        log = serializer.save(
+            admin_user=request.user,
+            ip_address=request.META.get('REMOTE_ADDR'),
+        )
+        return Response(
+            AdminAuditLogSerializer(log).data,
+            status=status.HTTP_201_CREATED,
+        )
 
     @action(detail=False, methods=['post'], url_path='clear')
     def clear(self, request):

@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Vehix</string>
+	<string>SRS User</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -76,13 +76,13 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Vehix needs your location to find nearby roadies and show your position on the map.</string>
+	<string>SRS User uses your location to find nearby mechanics and show your position on the map.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Vehix needs your location to track your ride progress in the background.</string>
+	<string>SRS User uses your location to track your roadside assistance request in the background.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Vehix needs access to your camera to take a profile picture.</string>
+	<string>SRS User uses your camera to take a profile picture.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Vehix needs access to your photo library to select a profile picture.</string>
+	<string>SRS User uses your photo library to select a profile picture.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

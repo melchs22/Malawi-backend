@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           builder: (context, child) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              title: 'Vehix Rider',
+              title: 'SRS User',
               theme: ThemeData(
                 primarySwatch: Colors.blue,
                 useMaterial3: true,

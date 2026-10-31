@@ -15,7 +15,7 @@ class SessionInvalidatedException implements Exception {
 }
 
 class ApiService {
-  static const String baseUrl = "https://backend.vehix.ug/api";
+  static const String baseUrl = "https://smartmobilityroadcare.com/api";
   
   // Stream to notify UI about session invalidation (multiple device login)
   static final StreamController<String> _sessionController = StreamController<String>.broadcast();
