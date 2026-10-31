@@ -11,12 +11,67 @@ class Migration(migrations.Migration):
         migrations.SeparateDatabaseAndState(
             database_operations=[
                 migrations.RunSQL(
-                    sql="ALTER INDEX requests_ra_service_idx RENAME TO requests_ra_service_c01108_idx",
-                    reverse_sql="ALTER INDEX requests_ra_service_c01108_idx RENAME TO requests_ra_service_idx",
-                ),
-                migrations.RunSQL(
-                    sql="ALTER INDEX requests_ra_rated_u_idx RENAME TO requests_ra_rated_u_58b232_idx",
-                    reverse_sql="ALTER INDEX requests_ra_rated_u_58b232_idx RENAME TO requests_ra_rated_u_idx",
+                    sql=[
+                        """
+                        DO $migration$
+                        BEGIN
+                            IF to_regclass('public.service_requests_cancellationreason') IS NOT NULL
+                               AND to_regclass('public.requests_cancellationreason') IS NULL THEN
+                                ALTER TABLE service_requests_cancellationreason
+                                    RENAME TO requests_cancellationreason;
+                            END IF;
+                            IF to_regclass('public.service_requests_chatmessage') IS NOT NULL
+                               AND to_regclass('public.requests_chatmessage') IS NULL THEN
+                                ALTER TABLE service_requests_chatmessage
+                                    RENAME TO requests_chatmessage;
+                            END IF;
+                            IF to_regclass('public.service_requests_dispute') IS NOT NULL
+                               AND to_regclass('public.requests_dispute') IS NULL THEN
+                                ALTER TABLE service_requests_dispute
+                                    RENAME TO requests_dispute;
+                            END IF;
+                            IF to_regclass('public.service_requests_rating') IS NOT NULL
+                               AND to_regclass('public.requests_rating') IS NULL THEN
+                                ALTER TABLE service_requests_rating
+                                    RENAME TO requests_rating;
+                            END IF;
+                            IF to_regclass('public.service_requests_requestcancellation') IS NOT NULL
+                               AND to_regclass('public.requests_requestcancellation') IS NULL THEN
+                                ALTER TABLE service_requests_requestcancellation
+                                    RENAME TO requests_requestcancellation;
+                            END IF;
+                            IF to_regclass('public.service_requests_servicerequest') IS NOT NULL
+                               AND to_regclass('public.requests_servicerequest') IS NULL THEN
+                                ALTER TABLE service_requests_servicerequest
+                                    RENAME TO requests_servicerequest;
+                            END IF;
+                        END
+                        $migration$
+                        """,
+                        """
+                        ALTER TABLE requests_servicerequest
+                            ADD COLUMN IF NOT EXISTS additional_notes text NULL,
+                            ADD COLUMN IF NOT EXISTS service_fee_amount numeric(12, 2) NULL,
+                            ADD COLUMN IF NOT EXISTS show_rider_username boolean NOT NULL DEFAULT true,
+                            ADD COLUMN IF NOT EXISTS show_rodie_username boolean NOT NULL DEFAULT true
+                        """,
+                        """
+                        DO $migration$
+                        BEGIN
+                            IF to_regclass('public.requests_ra_service_idx') IS NOT NULL
+                               AND to_regclass('public.requests_ra_service_c01108_idx') IS NULL THEN
+                                ALTER INDEX requests_ra_service_idx
+                                    RENAME TO requests_ra_service_c01108_idx;
+                            END IF;
+                            IF to_regclass('public.requests_ra_rated_u_idx') IS NOT NULL
+                               AND to_regclass('public.requests_ra_rated_u_58b232_idx') IS NULL THEN
+                                ALTER INDEX requests_ra_rated_u_idx
+                                    RENAME TO requests_ra_rated_u_58b232_idx;
+                            END IF;
+                        END
+                        $migration$
+                        """,
+                    ],
                 ),
             ],
             state_operations=[

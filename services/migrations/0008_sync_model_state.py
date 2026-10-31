@@ -11,7 +11,40 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.SeparateDatabaseAndState(
-            database_operations=[],
+            database_operations=[
+                migrations.RunSQL(
+                    sql=[
+                        """
+                        ALTER TABLE services_servicetype
+                            ADD COLUMN IF NOT EXISTS has_subcategories boolean NOT NULL DEFAULT false,
+                            ADD COLUMN IF NOT EXISTS service_fee numeric(12, 2) NOT NULL DEFAULT 0
+                        """,
+                        """
+                        CREATE TABLE IF NOT EXISTS services_servicesubcategory (
+                            id bigserial PRIMARY KEY,
+                            name varchar(100) NOT NULL,
+                            description text NOT NULL,
+                            is_active boolean NOT NULL,
+                            "order" integer NOT NULL,
+                            created_at timestamp with time zone NOT NULL,
+                            updated_at timestamp with time zone NOT NULL,
+                            service_id bigint NOT NULL
+                                REFERENCES services_servicetype (id) ON DELETE CASCADE,
+                            CONSTRAINT services_servicesubcategory_service_id_name_key
+                                UNIQUE (service_id, name)
+                        )
+                        """,
+                        """
+                        CREATE INDEX IF NOT EXISTS services_servicesubcategory_service_id_55eccf2aa_idx
+                            ON services_servicesubcategory (service_id)
+                        """,
+                        """
+                        CREATE UNIQUE INDEX IF NOT EXISTS services_servicesubcategory_service_id_name_key
+                            ON services_servicesubcategory (service_id, name)
+                        """,
+                    ],
+                ),
+            ],
             state_operations=[
                 migrations.AddField(
                     model_name="servicetype",
