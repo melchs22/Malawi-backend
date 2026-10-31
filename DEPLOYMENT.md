@@ -9,6 +9,7 @@ The production layout uses:
 
 - Backend source and persistent media: `/opt/smart-mobility/backend`
 - Production Compose file: `/opt/smart-mobility/docker-compose.deploy.yml`
+- Repository Compose override: `docker-compose.production.override.yml`
 - Production Dockerfile: `/opt/smart-mobility/backend.deploy.Dockerfile`
 - Live Django services: `malawi-web-1`, `malawi-worker-1`, `malawi-beat-1`
 
@@ -58,8 +59,9 @@ You can also run the workflow manually under
 
 The deployment uses a narrow source sync and excludes `.env*`, `.git`, `media`,
 static output, and generated mobile build/dependency directories. It never
-deletes or recreates the database or Redis services. Migration failures stop
-the deployment before the web services are recreated.
+deletes or recreates the database or Redis services. The Compose override
+publishes the API at `127.0.0.1:8001`, as expected by the host Nginx proxy.
+Migration failures stop the deployment before the web services are recreated.
 
 The backend Docker build also uses the repository's `.dockerignore` so local
 environment files, media uploads, Git metadata, and generated mobile artifacts
